@@ -50,7 +50,7 @@ for i in getContactInfo(getContacts()).values():
         table.add_row([str(p), i[0][0][0], i[0][0][1], "---", utils.formatContactInfo(i[1], p)[1]])
     print i
     print
-    p+=1
+    p += 1
 print table
    
 
