@@ -6,6 +6,8 @@ def iOSTimeToDate(date):
     return Date
 
 def formatContactInfo(ctinfo, ctID):
+    if type(ctinfo[0]) == type(None):
+        return [ctID, ["No info found"]]
     ctinfo_list = []
     for i in range(len(ctinfo)):
         ctinfo_list.append(ctinfo[i][0])

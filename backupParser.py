@@ -1,17 +1,19 @@
-from Person import Person
 import sqlite3, prettytable
 import utils
 
 # ---------------------------------------------
 #Cosas a cambiar:
-#   (*) Tiempo iOS a ISO ---> TypeError [Linea 46] 
+#  
+
+#----------------------------------------------
 
 _CONTACTS_DB = "31bb7ba8914766d4ba40d6dfb6113c8b614be442"
 _CALENDAR_DB = "2041457d5fe04d39d0ab481178355df6781e6858"
 _NOTES_DB = "ca3bc056d4da0bbf88b5fb3be254f3b7147e639c"
 _CALLHISTORY_DB = "2b2b0084a1bc3a5ac8c27afdf14afb42c61a19ca"
 _LOCATIONS_DB = "4096c9ec676f2847dc283405900e284a7c815836"
- 
+
+dbloc = "/home/gonzalo/Downloads/backup/"
 
 # FOR iOS 11 and newer: _WEBHISTORY_DB = "e74113c185fd8297e140cfcf9c99436c5cc06b57" 
 def getContacts():
@@ -43,9 +45,9 @@ table.field_names = ["record_id", "Name", "Last", "Birthday", "Contact Info"]
 p = 1
 for i in getContactInfo(getContacts()).values():
     try:
-        table.add_row(str(p),[i[0][0][0], i[0][0][1], utils.iOSTimeToDate(float(i[0][0][2])), i[[1][0]]])
+        table.add_row(str(p),[i[0][0][0], i[0][0][1], utils.iOSTimeToDate(float(i[0][0][2])), utils.formatContactInfo(i[1], p)[1]])
     except TypeError:
-        table.add_row([i[0][0][0], i[0][0][1], "---", i[[1][0]][0]])
+        table.add_row([str(p), i[0][0][0], i[0][0][1], "---", utils.formatContactInfo(i[1], p)[1]])
     print i
     print
     p+=1
