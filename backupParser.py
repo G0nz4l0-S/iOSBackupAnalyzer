@@ -39,15 +39,16 @@ def getContactInfo(contacts):
 for i in getContactInfo(getContacts()).values():
     print i
 table = prettytable.PrettyTable()
-table.field_names = ["Name", "Last", "Birthday", "Contact Info"]
+table.field_names = ["record_id", "Name", "Last", "Birthday", "Contact Info"]
+p = 1
 for i in getContactInfo(getContacts()).values():
     try:
-        table.add_row([i[0][0][0], i[0][0][1], utils.iOSTimeToDate(float(i[0][0][2])), i[[1][0]]])
+        table.add_row(str(p),[i[0][0][0], i[0][0][1], utils.iOSTimeToDate(float(i[0][0][2])), i[[1][0]]])
     except TypeError:
         table.add_row([i[0][0][0], i[0][0][1], "---", i[[1][0]][0]])
     print i
     print
-
+    p+=1
 print table
    
 
