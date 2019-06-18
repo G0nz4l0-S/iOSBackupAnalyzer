@@ -35,7 +35,7 @@ def getContactInfo(contacts):
         print
         ctinfo = list(cursor.execute("SELECT value FROM ABMultiValue WHERE record_id == %i;" %i));
         contacts[i] = [contacts[i],(list(ctinfo))]
-
+    conCT.close()
     return contacts
 
 for i in getContactInfo(getContacts()).values():
