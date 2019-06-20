@@ -1,4 +1,6 @@
 import datetime
+import html2text
+import unicodedata
 
 def iOSTimeToDate(date):
     unixTS = 978307200
@@ -13,4 +15,10 @@ def formatContactInfo(ctinfo, ctID):
         ctinfo_list.append(ctinfo[i][0])
 
     return [ctID, ctinfo_list]
-    
+
+
+def HTMLToText(htmltext):
+    parser = html2text.HTML2Text()
+    asciitext = unicodedata.normalize("NFKD", htmltext).encode("ascii", "ignore")
+    return parser.handle(asciitext)
+
