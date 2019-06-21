@@ -13,12 +13,22 @@ def getNotes(dbloc):
     for i in range(1, numberOfNotes+1):
          note_item = list(cursor.execute("SELECT ZAUTHOR, ZCREATIONDATE, ZMODIFICATIONDATE FROM ZNOTE WHERE Z_PK == %i;" %i))
          note_body = list(cursor.execute("SELECT ZCONTENT FROM ZNOTEBODY WHERE Z_PK == %i" %i))[0][0]
-         note = [note_item[0][0][0],utils.iOSTimeToDate(float(note_item[0][0][1])), utils.iOSTimeToDate(float(note_item[0][0][2])), utils.HTMLToText(note_body)]
+         note = [str(i), note_item[0][0],utils.iOSTimeToDate(float(note_item[0][1])), utils.iOSTimeToDate(float(note_item[0][2])), utils.HTMLToText(note_body)]
          table.add_row(note)
-
+    connCT.close()
     print table
+
+def getNoteTitle(dbloc):
+    table = prettytable.PrettyTable()
+    table.field_names = ["Note ID [Z_PK]", "Note Title", "Creation Date"]
+    connCT = sqlite3.connect(dbloc+_NOTES_DB)
+    cursor = connCT.cursor()
+    numberOfNotes = int(list(c.execute("SELECT COUNT(*) FROM ZNOTEBODY"))[0][0])
+    for i in range(1, numberOfNotes+1):
+        
 
 def handler(dbloc = "/home/gonzalo/Downloads/backup/"):
     getNotes(dbloc)
 
 handler()
+
